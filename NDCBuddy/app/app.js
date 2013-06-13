@@ -25,29 +25,33 @@ angular.module('ndcbuddy', ['ndcbuddy.azureMobile']).
 		$routeProvider.
 			when('/events', { templateUrl: '/app/partials/events.html', controller: EventListCtrl, isRestricted: true }).
 			when('/login', { templateUrl: '/app/partials/login.html', controller: LoginCtrl }).
-			when('/event/:eventId', { templateUrl: 'partials/event.html', controller: EventDetailCtrl }).
+			when('/event/:eventId', { templateUrl: '/app/partials/event.html', controller: EventDetailCtrl, isRestricted: true }).
 			otherwise({ redirectTo: '/events' });
   }])
 .run(['$rootScope', '$location', 'identity', function ($rootScope, $location, identity) {
 
-	$rootScope.$on("$routeChangeStart", function (event, next, current) {
-		$rootScope.error = null;
-		if (next.isRestricted && !identity.isLoggedIn) {
+    $rootScope.$on("$routeChangeStart", function (event, next, current) {
+        if (next.isRestricted && !identity.isLoggedIn) {
+            $rootScope.returnPath = $location.path();
 			$location.path('/login');
 		}
 	});
 }]);
 
 
-function LoginCtrl($scope, $location, client, identity) {
+function LoginCtrl($rootScope, $scope, $location, client, identity) {
 	$scope.identity = identity;
 	
 	client.login("facebook").then(function (success) {
 		
 		identity.isLoggedIn = true;
 		identity.userId = client.currentUser.userId;
-		$location.path("/events");
-		$scope.$apply();
+	    if ($rootScope.returnPath) {
+	        $location.path($rootScope.returnPath);
+	    } else {
+	        $location.path('/');
+	    }
+	    $scope.$apply();
 	}, function (error) {
 		alert(error);
 	});
@@ -55,11 +59,12 @@ function LoginCtrl($scope, $location, client, identity) {
 }
 
 
-function EventListCtrl($scope, client, identity) {
+function EventListCtrl($scope,$location, client, identity) {
 	$scope.register = function (eventId) {
 		var registeredTable = client.getTable("registeredForEvent");
 		registeredTable.insert({ eventId: eventId }).then(function(success) {
-			alert("Registered for event!");
+		    $location.path("/event/" + eventId);
+		    $scope.$apply();
 		});
 		$scope.selectedId = eventId;
 	};
@@ -73,17 +78,19 @@ function EventListCtrl($scope, client, identity) {
 
 
 
-function EventDetailCtrl($scope, $routeParams, client, identity) {
+function EventDetailCtrl($scope, $routeParams, client, identity, $http) {
 	var eventId = $routeParams.eventId;
 	var config = {};
-	config.headers["X-ZUMO-APPLICATION"] = client.applicationKey;
-	var getRegisteredEvents = function() {
+    config.headers = {};
+    config.headers["X-ZUMO-APPLICATION"] = client.applicationKey;
+    config.headers["X-ZUMO-AUTH"] = client.currentUser.mobileServiceAuthenticationToken;
+    $scope.getEvents = function() {
 		$http.get('https://ndcbuddy.azure-mobile.net/api/getregisteredevents', config)
-			.sucess(function(data, status) {
+			.success(function(data, status) {
 				$scope.status = status;
 				$scope.data = data;
 			});
 	};
-
-
+	
+    
 }

@@ -139,6 +139,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
+    <Content Include="app\partials\event.html" />
     <Content Include="app\partials\events.html" />
     <Content Include="app\partials\login.html" />
     <Content Include="Content\images\glyphicons-halflings-white.png" />
