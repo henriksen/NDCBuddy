@@ -12,5 +12,12 @@
 
     @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
+    <script src="https://ndcbuddy.azure-mobile.net/client/MobileServices.Web-1.0.0.min.js"></script>
+    <script type="text/javascript">
+        var client = new WindowsAzure.MobileServiceClient(
+            "https://ndcbuddy.azure-mobile.net/",
+            "HPCnKHTBWgSiMoNxqYtjydPJSxIzFE13"
+        );
+    </script>
 </body>
 </html>
