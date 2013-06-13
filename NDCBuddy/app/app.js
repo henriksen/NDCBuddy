@@ -26,6 +26,7 @@ angular.module('ndcbuddy', ['ndcbuddy.azureMobile']).
 			when('/events', { templateUrl: '/app/partials/events.html', controller: EventListCtrl, isRestricted: true }).
 			when('/login', { templateUrl: '/app/partials/login.html', controller: LoginCtrl }).
 			when('/registeredEvents', { templateUrl: '/app/partials/registeredEvents.html', controller: RegisteredEventsCtrl, isRestricted: true }).
+			when('/event/:eventId', { templateUrl: '/app/partials/event.html', controller: EventCtrl, isRestricted: true }).
 			otherwise({ redirectTo: '/registeredEvents' });
   }])
 .run(['$rootScope', '$location', 'identity', function ($rootScope, $location, identity) {
@@ -87,4 +88,24 @@ function RegisteredEventsCtrl($scope, $http, client ) {
 		.success(function(data, status) {
 			$scope.registeredEvents = data;
 		});
+
+    $scope.post = function(event, status) {
+        var statusTable = client.getTable(statuses);
+        statusTable.insert({ eventId: event.eventId, status: status }).then(function(success) {
+            
+        });
+    };
+}
+
+function EventCtrl($scope, $routeParams, $http, client) {
+    $scope.eventId = $routeParams.eventId;
+    $scope.post = function() {
+        if ($scope.status != "") {
+            client.getTable('status').insert({ eventId: $scope.eventId, status: $scope.status });
+        }
+    };
+    client.getTable('events').where({ id: $scope.eventId }).read().done(
+        function(result) {
+            $scope.event = result;
+        });
 }
