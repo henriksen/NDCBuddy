@@ -36,26 +36,8 @@ angular.module('ndcbuddy', ['ndcbuddy.azureMobile']).
 			$location.path('/login');
 		}
 	});
-
-	//$rootScope.appInitialized = true;
 }]);
-//.directive('checkUser', ['$rootScope', '$location', 'identity', function ($root, $location, identity) {
-//    return {
-//        link: function (scope, elem, attrs, ctrl) {
-//            $root.$on('$routeChangeStart', function (event, currRoute, prevRoute) {
-//                if (prevRoute.access.isRestricted && !identity.isLoggedIn) {
-//                    $location.path("/login");
-//                }
-//                /*
-//				* IMPORTANT:
-//				* It's not difficult to fool the previous control,
-//				* so it's really IMPORTANT to repeat the control also in the backend,
-//				* before sending back from the server reserved information.
-//				*/
-//            });
-//        }
-//    };
-//}]);;
+
 
 function LoginCtrl($scope, $location, client, identity) {
 	$scope.identity = identity;
