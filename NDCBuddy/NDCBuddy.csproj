@@ -140,6 +140,7 @@
   <ItemGroup>
     <Content Include="app\app.js" />
     <Content Include="app\partials\event.html" />
+    <Content Include="app\partials\registeredEvents.html" />
     <Content Include="app\partials\events.html" />
     <Content Include="app\partials\login.html" />
     <Content Include="Content\images\glyphicons-halflings-white.png" />
@@ -562,6 +563,8 @@
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\less.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\underscore.js" />
+    <Content Include="Scripts\underscore.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

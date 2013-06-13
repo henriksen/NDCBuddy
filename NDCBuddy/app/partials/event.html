@@ -1,3 +1,10 @@
-﻿<div>What are you doing at {{ event.name }}:<br>
+﻿<div>What are you doing at <span data-ng-bind="event.name"></span>?<br>
         <input type="text" data-ng-model="status"/> <button class="btn btn-primary" data-ng-click="post(event, status)">Post</button>
     </div>
+<div data-ng-repeat="status in statuses">
+    <div>
+        <div data-ng-bind="status.status"></div>
+        <div data-ng-bind="$parent.formatDate(status.date)"></div>
+    </div>
+    
+</div>

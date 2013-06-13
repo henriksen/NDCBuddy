@@ -99,13 +99,34 @@ function RegisteredEventsCtrl($scope, $http, client ) {
 
 function EventCtrl($scope, $routeParams, $http, client) {
     $scope.eventId = $routeParams.eventId;
+    var refreshStatuses = function() {
+        client.getTable("status").where({ eventId: $scope.eventId }).read().done(
+            function(result) {
+                $scope.statuses = result;
+                $scope.$apply();
+            }
+        );
+    };
+
+    $scope.formatDate = function (utcDate) {
+        return new Date(utcDate).toLocaleString();
+    };
+
     $scope.post = function() {
-        if ($scope.status != "") {
-            client.getTable('status').insert({ eventId: $scope.eventId, status: $scope.status });
+        if ($scope.status && $scope.status.length > 0) {
+            client.getTable('status').insert({ eventId: $scope.eventId, status: $scope.status }).then(
+                function(success) {
+                    refreshStatuses();
+                });
+            $scope.status = "";
         }
     };
+    
+
     client.getTable('events').where({ id: $scope.eventId }).read().done(
         function(result) {
-            $scope.event = result;
+            $scope.event = _.first(result);
+            $scope.$apply();
         });
+    refreshStatuses();
 }
