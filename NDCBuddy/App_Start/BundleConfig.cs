@@ -26,6 +26,9 @@ namespace NDCBuddy
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                         "~/app/*.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/underscore").Include(
+            "~/Scripts/underscore.js"));
+
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //// use this BundleConfig OR add the 3 lines below to your existing BundleConfig.cs and delete this file.
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
