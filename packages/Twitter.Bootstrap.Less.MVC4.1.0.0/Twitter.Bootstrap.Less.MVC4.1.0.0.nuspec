@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Twitter.Bootstrap.Less.MVC4</id>
+    <version>1.0.0</version>
+    <title />
+    <authors>Christopher Deutsch</authors>
+    <owners>Christopher Deutsch</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Add Twitter Bootstrap to your MVC4 Internet Application. Includes everything you need to get Less working with bundling and minification.</description>
+    <dependencies>
+      <dependency id="dotless" />
+      <dependency id="Twitter.Bootstrap.Less" />
+    </dependencies>
+  </metadata>
+</package>
