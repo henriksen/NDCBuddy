@@ -25,7 +25,7 @@ angular.module('ndcbuddy', ['ndcbuddy.azureMobile']).
 		$routeProvider.
 			when('/events', { templateUrl: '/app/partials/events.html', controller: EventListCtrl, isRestricted: true }).
 			when('/login', { templateUrl: '/app/partials/login.html', controller: LoginCtrl }).
-			//when('/phones/:phoneId', { templateUrl: 'partials/phone-detail.html', controller: PhoneDetailCtrl }).
+			when('/event/:eventId', { templateUrl: 'partials/event.html', controller: EventDetailCtrl }).
 			otherwise({ redirectTo: '/events' });
   }])
 .run(['$rootScope', '$location', 'identity', function ($rootScope, $location, identity) {
@@ -69,4 +69,21 @@ function EventListCtrl($scope, client, identity) {
 		$scope.eventItems = eventItems;
 		$scope.$apply();
 	});
-} 
+}
+
+
+
+function EventDetailCtrl($scope, $routeParams, client, identity) {
+	var eventId = $routeParams.eventId;
+	var config = {};
+	config.headers["X-ZUMO-APPLICATION"] = client.applicationKey;
+	var getRegisteredEvents = function() {
+		$http.get('https://ndcbuddy.azure-mobile.net/api/getregisteredevents', config)
+			.sucess(function(data, status) {
+				$scope.status = status;
+				$scope.data = data;
+			});
+	};
+
+
+}
