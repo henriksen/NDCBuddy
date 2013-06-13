@@ -23,6 +23,9 @@ namespace NDCBuddy
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
                                     "~/Scripts/angular.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/app").Include(
+                        "~/app/*.js"));
+
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //// use this BundleConfig OR add the 3 lines below to your existing BundleConfig.cs and delete this file.
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////

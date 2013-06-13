@@ -1,0 +1,5 @@
+﻿<h2>Register for an event</h2>
+<div data-ng-repeat="eventItem in eventItems">
+    <button class="btn btn-block" data-ng-click="register(eventItem.id)">{{eventItem.name}}</button>
+</div>
+{{selectedId}}

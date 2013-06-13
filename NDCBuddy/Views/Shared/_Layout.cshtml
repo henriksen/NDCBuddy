@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html data-ng-app="ndcbuddy">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -10,15 +10,11 @@
 <body>
     @RenderBody()
 
+    <script src="https://ndcbuddy.azure-mobile.net/client/MobileServices.Web-1.0.0.min.js"></script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/app")
     @RenderSection("scripts", required: false)
-    <script src="https://ndcbuddy.azure-mobile.net/client/MobileServices.Web-1.0.0.min.js"></script>
-    <script type="text/javascript">
-        var client = new WindowsAzure.MobileServiceClient(
-            "https://ndcbuddy.azure-mobile.net/",
-            "HPCnKHTBWgSiMoNxqYtjydPJSxIzFE13"
-        );
-    </script>
+
 </body>
 </html>
