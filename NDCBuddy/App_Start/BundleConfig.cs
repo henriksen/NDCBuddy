@@ -8,7 +8,9 @@ namespace NDCBuddy
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-1.*",
+                        "~/Scripts/jquery-1.9.*"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jqueryplugins").Include(
                         "~/Scripts/jquery.timeago.js",
                         "~/Scripts/jquery.livequery.js"));
 
