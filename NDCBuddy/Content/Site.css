@@ -7911,7 +7911,7 @@ a.badge:focus {
   background-color: transparent;
   border: none;
 }
-.loginPanel {
-  margin: 40px auto ;
+#loginPanel {
+  margin-top: 40px;
   text-align: center;
 }

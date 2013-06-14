@@ -44,7 +44,7 @@ function LoginCtrl($rootScope, $scope, $location, client, identity) {
 	$scope.identity = identity;
 	$scope.login = function () {
 	    
-	    client.login("facebook", mobileAuthToken).then(function(success) {
+	    client.login("facebook").then(function(success) {
 
 	        identity.isLoggedIn = true;
 	        identity.userId = client.currentUser.userId;
@@ -111,7 +111,7 @@ function EventCtrl($scope, $routeParams, $http, client) {
                     var username = item.userId.split(':')[1];
                     return {
                         id: item.id,
-                        date: item.date,
+                        date: new Date(Number(item.date)),
                         status: item.status,
                         userId: item.userId,
                         fullName: item.fullName,

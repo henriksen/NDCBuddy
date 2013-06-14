@@ -1,15 +1,17 @@
-﻿<div id="fb-root"></div>
+﻿<!--<div id="fb-root"></div>
 <script>(function (d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
     js = d.createElement(s); js.id = id;
     js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=145497562308933";
     fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+}(document, 'script', 'facebook-jssdk'));</script>-->
 
-<div id="loginPanel" class="text-center">
-    <div>
+<div id="loginPanel" class="row">
+    <div class="span3 offset3">
         <button data-ng-click="login()" class="fbbutton"></button>
-        <div class="fb-facepile" data-app-id="145497562308933" data-max-rows="2" data-size="large" data-width="600"></div>
     </div>
 </div>
+<!--<div id="facebookPanel" class="row">
+    <div class="span3 offset3 fb-facepile" data-app-id="145497562308933" data-max-rows="2" data-size="large" data-width="600"></div>
+</div>-->
