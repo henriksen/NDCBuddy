@@ -11,8 +11,7 @@ namespace NDCBuddy
                         "~/Scripts/jquery-1.9.*"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryplugins").Include(
-                        "~/Scripts/jquery.timeago.js",
-                        "~/Scripts/jquery.livequery.js"));
+                        "~/Scripts/jquery.timeago.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery-ui*"));
