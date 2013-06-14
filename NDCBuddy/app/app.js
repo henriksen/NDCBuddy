@@ -111,7 +111,7 @@ function EventCtrl($scope, $routeParams, $http, client) {
                     var username = item.userId.split(':')[1];
                     return {
                         id: item.id,
-                        date: new Date(Number(item.date)),
+                        date: new Date(Number(item.date)).toISOString(),
                         status: item.status,
                         userId: item.userId,
                         fullName: item.fullName,
