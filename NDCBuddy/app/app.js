@@ -27,7 +27,7 @@ angular.module('ndcbuddy', ['ndcbuddy.azureMobile']).
 			when('/login', { templateUrl: '/app/partials/login.html', controller: LoginCtrl }).
 			when('/registeredEvents', { templateUrl: '/app/partials/registeredEvents.html', controller: RegisteredEventsCtrl, isRestricted: true }).
 			when('/event/:eventId', { templateUrl: '/app/partials/event.html', controller: EventCtrl, isRestricted: true }).
-			otherwise({ redirectTo: '/registeredEvents' });
+			otherwise({ redirectTo: '/events' });
   }])
 .run(['$rootScope', '$location', 'identity', function ($rootScope, $location, identity) {
 
@@ -104,7 +104,6 @@ function EventCtrl($scope, $routeParams, $http, client) {
     var refreshStatuses = function() {
         client.getTable("status")
             .where({ eventId: $scope.eventId })
-            .orderByDescending('date')
             .read().done(
             function (result) {
                 var statuses = _.map(result, function(item) {
@@ -115,7 +114,7 @@ function EventCtrl($scope, $routeParams, $http, client) {
                         status: item.status,
                         userId: item.userId,
                         fullName: item.fullName,
-                        profileImg: "https://graph.facebook.com/" + username + "/picture?width=100&height=100"
+                        profileImg: "https://graph.facebook.com/" + username + "/picture?width=75&height=75"
                     };
                 });
                 $scope.statuses = statuses;

@@ -18,3 +18,45 @@
     margin-top: 40px;
     text-align: center;
 }
+
+@profilePicSize: 75px;
+@margin:    12px;
+
+div.main {
+    padding: @margin;
+}
+
+.buttonBar {
+    text-align: right;
+}
+
+.statusInput {
+    background-color: #F5F5F5;
+    border-top-color: #E5E5E5;
+    padding: 12px;
+}
+
+.eventStatus {
+    clear: both;
+    margin-bottom: @margin;
+    min-height: @profilePicSize;
+}
+
+    .eventStatus img {
+        float: left;
+    }
+
+    .eventStatus .eventStatusMessage {
+        margin-left: @profilePicSize + @margin;
+    }
+        .eventStatus .eventStatusMessage h4 {
+            margin-bottom: 0;
+            font-size: @baseFontSize;
+        }
+
+        .eventStatus .eventStatusMessage time {
+            font-size: @fontSizeSmall;
+            color: @grayLight;
+        }
+             
+

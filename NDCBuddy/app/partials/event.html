@@ -1,12 +1,20 @@
-﻿<div>What are you doing at <span data-ng-bind="event.name"></span>?<br>
-        <input type="text" data-ng-model="status"/> <button class="btn btn-primary" data-ng-click="post(event, status)">Post</button>
+﻿<div>
+    <h2 data-ng-bind="event.name"></h2>
+    <div class="statusInput">
+        <input type="text" class="input-xxlarge" placeholder="What are you doing at {{event.name}}?" data-ng-model="status" />
+        <div class="buttonBar">
+            <button class="btn btn-primary" data-ng-click="post(event, status)">Post</button>
+        </div>
     </div>
+</div>
 <div data-ng-repeat="status in statuses">
-    <div>
+    <div class="eventStatus">
         <img src="" data-ng-src="{{status.profileImg}}" alt="" />
-        <div data-ng-bind="status.fullName"></div>
-        <div data-ng-bind="status.status"></div>
-        <time data-ng-bind="status.date" datetime="{{status.date}}"></time>
+        <div class="eventStatusMessage">
+            <h4 data-ng-bind="status.fullName"></h4>
+            <div data-ng-bind="status.status"></div>
+            <time data-ng-bind="status.date" datetime="{{status.date}}"></time>
+        </div>
     </div>
     
 </div>

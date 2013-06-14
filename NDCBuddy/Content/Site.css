@@ -7915,3 +7915,33 @@ a.badge:focus {
   margin-top: 40px;
   text-align: center;
 }
+div.main {
+  padding: 12px;
+}
+.buttonBar {
+  text-align: right;
+}
+.statusInput {
+  background-color: #F5F5F5;
+  border-top-color: #E5E5E5;
+  padding: 12px;
+}
+.eventStatus {
+  clear: both;
+  margin-bottom: 12px;
+  min-height: 75px;
+}
+.eventStatus img {
+  float: left;
+}
+.eventStatus .eventStatusMessage {
+  margin-left: 87px;
+}
+.eventStatus .eventStatusMessage h4 {
+  margin-bottom: 0;
+  font-size: 14px;
+}
+.eventStatus .eventStatusMessage time {
+  font-size: 11.9px;
+  color: #999999;
+}
