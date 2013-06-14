@@ -1,9 +1,9 @@
 ﻿<div>
-    <h2 data-ng-bind="event.name"></h2>
+    <h2><a href="#/events"><i class="icon-circle-arrow-left"></i></a> {{event.name}}</h2>
     <div class="statusInput">
-        <input type="text" class="input-xxlarge" placeholder="What are you doing at {{event.name}}?" data-ng-model="status" />
+        <input type="text" class="input-xxlarge" ui-keypress="{13:'post($event)'}" placeholder="What are you doing at {{event.name}}?" data-ng-model="status" />
         <div class="buttonBar">
-            <button class="btn btn-primary" data-ng-click="post(event, status)">Post</button>
+            <button class="btn btn-primary"  ng-disabled="canPost()" data-ng-click="post(event, status)">Post</button>
         </div>
     </div>
 </div>

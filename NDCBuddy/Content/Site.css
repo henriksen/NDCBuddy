@@ -7931,6 +7931,9 @@ div.main {
   margin-bottom: 12px;
   min-height: 75px;
 }
+h2 a:hover {
+  text-decoration: none;
+}
 .eventStatus img {
   float: left;
 }

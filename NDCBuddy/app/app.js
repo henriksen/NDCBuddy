@@ -20,7 +20,7 @@ angular.module('ndcbuddy.azureMobile', [], function ($provide) {
 
 
 
-angular.module('ndcbuddy', ['ndcbuddy.azureMobile']).
+angular.module('ndcbuddy', ['ui.keypress', 'ndcbuddy.azureMobile']).
 	config(['$routeProvider', function ($routeProvider) {
 		$routeProvider.
 			when('/events', { templateUrl: '/app/partials/events.html', controller: EventListCtrl, isRestricted: true }).
@@ -100,7 +100,13 @@ function RegisteredEventsCtrl($scope, $http, client) {
 }
 
 function EventCtrl($scope, $routeParams, $http, client) {
+    $scope.status = "";
     $scope.eventId = $routeParams.eventId;
+    $scope.isPosting = false;
+    $scope.canPost = function() {
+        return !($scope.status.length > 0) && !$scope.isPosting;
+    };
+    
     var refreshStatuses = function() {
         client.getTable("status")
             .where({ eventId: $scope.eventId })
@@ -129,9 +135,14 @@ function EventCtrl($scope, $routeParams, $http, client) {
 
     $scope.post = function() {
         if ($scope.status && $scope.status.length > 0) {
+            $scope.isPosting = true;
             client.getTable('status').insert({ eventId: $scope.eventId, status: $scope.status }).then(
                 function(success) {
+                    
                     refreshStatuses();
+                    $scope.isPosting = false;
+                    
+
                 });
             $scope.status = "";
         }

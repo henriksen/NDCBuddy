@@ -22,7 +22,8 @@ namespace NDCBuddy
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
-                                    "~/Scripts/angular.js"));
+                                    "~/Scripts/angular.js",
+                                    "~/Scripts/angular-keypress.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                         "~/app/*.js"));
@@ -35,7 +36,10 @@ namespace NDCBuddy
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
             var css = new StyleBundle("~/Content/css").Include("~/Content/site.less");
             css.Transforms.Add(new LessMinify());
-            bundles.Add(css);  
+            bundles.Add(css);
+
+            bundles.Add(new StyleBundle("~/Content/fontAwesome").Include(
+                "~/Content/font-awesome.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",
