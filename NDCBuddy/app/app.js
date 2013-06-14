@@ -66,7 +66,6 @@ var EventListCtrl = ['$scope', '$location', 'client',
             $location.path("/event/" + eventId);
             $scope.$apply();
         });
-        $scope.selectedId = eventId;
     };
 
     var eventsTable = client.getTable('events');

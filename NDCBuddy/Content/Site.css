@@ -7915,6 +7915,9 @@ a.badge:focus {
   margin-top: 40px;
   text-align: center;
 }
+.accent {
+  color: #3990a2;
+}
 div.main {
   padding: 12px;
 }
