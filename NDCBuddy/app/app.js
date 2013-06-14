@@ -42,21 +42,21 @@ angular.module('ndcbuddy', ['ndcbuddy.azureMobile']).
 
 function LoginCtrl($rootScope, $scope, $location, client, identity) {
 	$scope.identity = identity;
-	
-	client.login("facebook").then(function (success) {
-		
-		identity.isLoggedIn = true;
-		identity.userId = client.currentUser.userId;
-	    if ($rootScope.returnPath) {
-	        $location.path($rootScope.returnPath);
-	    } else {
-	        $location.path('/');
-	    }
-	    $scope.$apply();
-	}, function (error) {
-		alert(error);
-	});
+	$scope.login = function() {
+	    client.login("facebook").then(function(success) {
 
+	        identity.isLoggedIn = true;
+	        identity.userId = client.currentUser.userId;
+	        if ($rootScope.returnPath) {
+	            $location.path($rootScope.returnPath);
+	        } else {
+	            $location.path('/');
+	        }
+	        $scope.$apply();
+	    }, function(error) {
+	        alert(error);
+	    });
+	}
 }
 
 
@@ -79,7 +79,8 @@ function EventListCtrl($scope,$location, client, identity) {
 
 
 
-function RegisteredEventsCtrl($scope, $http, client ) {
+function RegisteredEventsCtrl($scope, $http, client) {
+
 	var config = {};
     config.headers = {};
     config.headers["X-ZUMO-APPLICATION"] = client.applicationKey;
@@ -100,9 +101,23 @@ function RegisteredEventsCtrl($scope, $http, client ) {
 function EventCtrl($scope, $routeParams, $http, client) {
     $scope.eventId = $routeParams.eventId;
     var refreshStatuses = function() {
-        client.getTable("status").where({ eventId: $scope.eventId }).read().done(
-            function(result) {
-                $scope.statuses = result;
+        client.getTable("status")
+            .where({ eventId: $scope.eventId })
+            .orderByDescending('date')
+            .read().done(
+            function (result) {
+                var statuses = _.map(result, function(item) {
+                    var username = item.userId.split(':')[1];
+                    return {
+                        id: item.id,
+                        date: item.date,
+                        status: item.status,
+                        userId: item.userId,
+                        fullName: item.fullName,
+                        profileImg: "https://graph.facebook.com/" + username + "/picture?width=100&height=100"
+                    };
+                });
+                $scope.statuses = statuses;
                 $scope.$apply();
             }
         );
