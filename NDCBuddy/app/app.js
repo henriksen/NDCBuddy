@@ -1,6 +1,4 @@
-﻿
-
-angular.module('ndcbuddy.azureMobile', [], function ($provide) {
+﻿angular.module('ndcbuddy.azureMobile', [], ['$provide', function ($provide) {
 	$provide.factory('client', function () {
 		var client = new WindowsAzure.MobileServiceClient(
 			"https://ndcbuddy.azure-mobile.net/",
@@ -16,7 +14,7 @@ angular.module('ndcbuddy.azureMobile', [], function ($provide) {
 		};
 		return identity;
 	});
-});
+}]);
 
 
 
@@ -39,49 +37,48 @@ angular.module('ndcbuddy', ['ui.keypress', 'ndcbuddy.azureMobile']).
 	});
 }]);
 
+var LoginCtrl = ['$rootScope', '$scope', '$location', 'client', 'identity',
+    function ($rootScope, $scope, $location, client, identity) {
+    $scope.identity = identity;
+    $scope.login = function() {
 
-function LoginCtrl($rootScope, $scope, $location, client, identity) {
-	$scope.identity = identity;
-	$scope.login = function () {
-	    
-	    client.login("facebook").then(function(success) {
+        client.login("facebook").then(function(success) {
 
-	        identity.isLoggedIn = true;
-	        identity.userId = client.currentUser.userId;
-	        if ($rootScope.returnPath) {
-	            $location.path($rootScope.returnPath);
-	        } else {
-	            $location.path('/');
-	        }
-	        $scope.$apply();
-	    }, function(error) {
-	        alert(error);
-	    });
-	}
-}
+            identity.isLoggedIn = true;
+            identity.userId = client.currentUser.userId;
+            if ($rootScope.returnPath) {
+                $location.path($rootScope.returnPath);
+            } else {
+                $location.path('/');
+            }
+            $scope.$apply();
+        }, function(error) {
+            alert(error);
+        });
+    };
+}];
 
+var EventListCtrl = ['$scope', '$location', 'client',
+    function ($scope, $location, client) {
+    $scope.register = function(eventId) {
+        var registeredTable = client.getTable("registeredForEvent");
+        registeredTable.insert({ eventId: eventId }).then(function(success) {
+            $location.path("/event/" + eventId);
+            $scope.$apply();
+        });
+        $scope.selectedId = eventId;
+    };
 
-function EventListCtrl($scope,$location, client, identity) {
-	$scope.register = function (eventId) {
-		var registeredTable = client.getTable("registeredForEvent");
-		registeredTable.insert({ eventId: eventId }).then(function(success) {
-		    $location.path("/event/" + eventId);
-		    $scope.$apply();
-		});
-		$scope.selectedId = eventId;
-	};
-
-	var eventsTable = client.getTable('events');
-	eventsTable.read().then(function (eventItems) {
-		$scope.eventItems = eventItems;
-		$scope.$apply();
-	});
-}
+    var eventsTable = client.getTable('events');
+    eventsTable.read().then(function(eventItems) {
+        $scope.eventItems = eventItems;
+        $scope.$apply();
+    });
+}];
 
 
 
-function RegisteredEventsCtrl($scope, $http, client) {
-
+var RegisteredEventsCtrl = ['$scope', '$http', 'client', function ($scope,$http, client) { /* constructor body */ 
 	var config = {};
     config.headers = {};
     config.headers["X-ZUMO-APPLICATION"] = client.applicationKey;
@@ -97,9 +94,9 @@ function RegisteredEventsCtrl($scope, $http, client) {
             
         });
     };
-}
+}];
 
-function EventCtrl($scope, $routeParams, $http, client) {
+var EventCtrl = ['$scope', '$routeParams', '$http', 'client', function ($scope, $routeParams, $http, client) { /* constructor body */ 
     $scope.status = "";
     $scope.eventId = $routeParams.eventId;
     $scope.isPosting = false;
@@ -155,4 +152,4 @@ function EventCtrl($scope, $routeParams, $http, client) {
             $scope.$apply();
         });
     refreshStatuses();
-}
+}];
