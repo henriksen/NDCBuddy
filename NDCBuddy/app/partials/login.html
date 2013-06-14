@@ -7,7 +7,9 @@
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
-<div>Logged in: {{identity.isLoggedIn}}</div>
-<div><button data-ng-click="login()" class="btn btn-primary btn-large">Log in with Facebook</button></div>
-
-<div class="fb-facepile" data-app-id="145497562308933" data-max-rows="2" data-size="large" data-width="600"></div>
+<div id="loginPanel" class="text-center">
+    <div>
+        <button data-ng-click="login()" class="fbbutton"></button>
+        <div class="fb-facepile" data-app-id="145497562308933" data-max-rows="2" data-size="large" data-width="600"></div>
+    </div>
+</div>

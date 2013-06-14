@@ -42,8 +42,9 @@ angular.module('ndcbuddy', ['ndcbuddy.azureMobile']).
 
 function LoginCtrl($rootScope, $scope, $location, client, identity) {
 	$scope.identity = identity;
-	$scope.login = function() {
-	    client.login("facebook").then(function(success) {
+	$scope.login = function () {
+	    
+	    client.login("facebook", mobileAuthToken).then(function(success) {
 
 	        identity.isLoggedIn = true;
 	        identity.userId = client.currentUser.userId;
