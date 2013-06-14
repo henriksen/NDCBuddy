@@ -95,7 +95,7 @@ var RegisteredEventsCtrl = ['$scope', '$http', 'client', function ($scope,$http,
     };
 }];
 
-var EventCtrl = ['$scope', '$routeParams', '$http', 'client', function ($scope, $routeParams, $http, client) { /* constructor body */ 
+var EventCtrl = ['$scope', '$routeParams', '$http', '$timeout', 'client', function ($scope, $routeParams, $http, $timeout, client) { /* constructor body */ 
     $scope.status = "";
     $scope.eventId = $routeParams.eventId;
     $scope.isPosting = false;
@@ -112,7 +112,7 @@ var EventCtrl = ['$scope', '$routeParams', '$http', 'client', function ($scope, 
                     var username = item.userId.split(':')[1];
                     return {
                         id: item.id,
-                        date: new Date(Number(item.date)).toISOString(),
+                        date: jQuery.timeago(new Date(Number(item.date)).toISOString()),
                         status: item.status,
                         userId: item.userId,
                         fullName: item.fullName,
@@ -123,6 +123,11 @@ var EventCtrl = ['$scope', '$routeParams', '$http', 'client', function ($scope, 
                 $scope.$apply();
             }
         );
+    };
+
+    var refreshTimer = function() {
+        refreshStatuses();
+        $timeout(refreshTimer, 5000);
     };
 
     $scope.formatDate = function (utcDate) {
@@ -150,5 +155,5 @@ var EventCtrl = ['$scope', '$routeParams', '$http', 'client', function ($scope, 
             $scope.event = _.first(result);
             $scope.$apply();
         });
-    refreshStatuses();
+    refreshTimer();
 }];
