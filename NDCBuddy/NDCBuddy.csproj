@@ -141,10 +141,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
+    <Content Include="app\EventCtrl.js" />
+    <Content Include="app\EventListCtrl.js" />
+    <Content Include="app\LoginCtrl.js" />
     <Content Include="app\partials\event.html" />
     <Content Include="app\partials\registeredEvents.html" />
     <Content Include="app\partials\events.html" />
     <Content Include="app\partials\login.html" />
+    <Content Include="app\RegisteredEventsCtrl.js" />
     <Content Include="Content\font-awesome-ie7.css" />
     <Content Include="Content\font-awesome-ie7.min.css" />
     <Content Include="Content\font-awesome.css" />
